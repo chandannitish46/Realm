@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace RealmPOC
 {
+    /// <summary>
+    /// SETTING UP THE HASH FOR ENCRYPTION
+    /// </summary>
     public static class DbSetUp
     {
         
