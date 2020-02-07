@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RealmPOC.Resources">
+    <Color x:Key="SecondaryBackgroundColor100">#FFD8D5CF</Color>
+    <Color x:Key="DefaultBackgroundColor100">#FFFFFF</Color>
+    <Color x:Key="PrimaryForegroundColor100">#FFF</Color>
+    <Color x:Key="SecondaryForegroundColor100">#19213A</Color>
+    <Color x:Key="PrimaryBackgroundColor100">#FF8200</Color>
+    <Color x:Key="DataGridHeaderBackgroundColor">#F1F1F1</Color>
+
+    <SolidColorBrush x:Key="SecondaryBackgroundBrush100" Color="{StaticResource SecondaryBackgroundColor100}" />
+    <SolidColorBrush x:Key="DefaultBackgroundBrush100" Color="{StaticResource DefaultBackgroundColor100}" />
+    <SolidColorBrush x:Key="PrimaryForegroundBrush100" Color="{StaticResource PrimaryForegroundColor100}" />
+    <SolidColorBrush x:Key="SecondaryForegroundBrush100" Color="{StaticResource SecondaryForegroundColor100}" />
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush100" Color="{StaticResource PrimaryBackgroundColor100}" />
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush" Color="{StaticResource DataGridHeaderBackgroundColor}" />
+
+    <FontFamily x:Key="AppFontFamily">Arial</FontFamily>
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle
+                            Margin="2"
+                            Stroke="#60000000"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonBase" TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <!--<Setter Property="OverridesDefaultStyle" Value="true" />-->
+        <!--<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />-->
+        <Setter Property="Foreground" Value="{StaticResource PrimaryForegroundBrush100}" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundBrush100}"/>
+        <Setter Property="FontSize" Value="12" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
+        <Setter Property="Padding" Value="20 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="35" />
+    </Style>
+    
+    
+    <Style x:Key="MyFocusVisual"  TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+      
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Grid Margin="3 2">
+                        <Rectangle Name="r1" StrokeThickness="1" Stroke="Black" StrokeDashArray="2 2"/>
+                        <Border Name="border" Width="{TemplateBinding ActualWidth}" Height="{TemplateBinding ActualHeight}"  CornerRadius="2" BorderThickness="1" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TextBoxBase" TargetType="{x:Type TextBox}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Padding" Value="10 0" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="35" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        x:Name="Bd"
+                        Height="35"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        SnapsToDevicePixels="true">
+                        <Grid>
+                            <TextBlock
+                                Padding="7,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Opacity=".5" />
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource SecondaryBackgroundBrush100}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource SecondaryBackgroundBrush100}" />
+                            <Setter Property="Foreground" Value="{StaticResource PrimaryForegroundBrush100}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource DefaultBackgroundBrush100}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource SecondaryBackgroundBrush100}" />
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryForegroundBrush100}" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF2626" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <AdornedElementPlaceholder />
+                        <!--<Border
+                            BorderBrush="Red"
+                            BorderThickness="1"
+                            CornerRadius="5">
+                            <AdornedElementPlaceholder />
+                        </Border>-->
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="TextBlockBase" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+
+</ResourceDictionary>
